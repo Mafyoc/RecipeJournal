@@ -1,13 +1,15 @@
 #include "recipe.h"
 using namespace std;
 
-
-void Recipe::setIngredients(vector<string> ingredients) {
-
-}
-void Recipe::setAmounts(vector<string> amounts) {
+void loadRecipe() {
 
 }
-void Recipe::setSteps(vector<string> steps) {
+void addIngredient(string ingredients) {
+
+}
+void addAmount(string amounts) {
+
+}
+void setSteps(string steps) {
 
 }

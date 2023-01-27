@@ -1,18 +1,21 @@
-#ifndef RECIPE.H
-#define RECIPE.H
+#ifndef RECIPE_H
+#define RECIPE_H
 #include<vector>
 #include<string>
 using namespace std;
 
 class Recipe {
 	public:
-		void setIngredients(vector<string> ingredients);
-		void setAmounts(vector<string> amounts);
-		void setSteps(vector<string> steps);
+		void loadRecipe();
+		void addIngredient(string ingredients);
+		void addAmount(string amounts);
+		void setSteps(string steps);
 	private:
-		vector<string> ingredients;
-		vector<string> amounts;
-		vector<string> steps;
+		int recipeID;
+		string recipeName;
+		string ingredients;
+		string amounts;
+		string steps;
 };
 
 #endif
