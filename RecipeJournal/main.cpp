@@ -7,50 +7,53 @@ using namespace std;
 
 int main() {
 	Recipe recipe;
-	string loadOrCreate;
+	int loadOrCreate;
 	string recipeName;
+	vector<string> ingredients;
+	vector<string> amounts;
+	string currentIngredient;
+	string currentAmount;
+	string isLastIngredientAnswer;
+	int numIngredients = 0;
+	bool loopBreak = false;
+	int stepNum = 0;
+	string currentStep;
+	string isLastStepAnswer;
 
-	cout << "Enter 'create' to add a new recipe. Enter 'search' to load an existing recipe." << endl;
+	cout << "Enter '1' to add a new recipe. Enter '0' to load an existing recipe." << endl;
 	cin >> loadOrCreate;
 
-	if (loadOrCreate == "create"){
+	switch (loadOrCreate){
+	case 1: //create new recipe
 		cout << "Please enter the name of your recipe." << endl;
 		cin >> recipeName;
 
-		string currentIngredient;
-		string currentAmount;
-		string isLastIngredientAnswer;
-		int numIngredients = 0;
-		bool loopBreak = false;
-
 		while(loopBreak == false) {
-			vector<string> ingredients;
-			vector<string> amounts;
-			numIngredients += 1;
+			
 			cout << "Please add an ingredient." << endl;
 			cin >> currentIngredient;
-			ingredients[numIngredients - 1] = currentIngredient;
 			cout << "Please enter the amount of ingredient." << endl;
-			cin >> currentAmount;
-			amounts[numIngredients - 1] = currentAmount;
 
+			ingredients[numIngredients] = currentIngredient;
+			amounts[numIngredients] = currentAmount;
 
 			cout << "Is there another ingredient? y/n" << endl;
 			cin >> isLastIngredientAnswer;
 			if (isLastIngredientAnswer == "n") {
 				loopBreak = true;
 			}
-			/*recipeName.setIngredients() ;
+			else {
+				numIngredients += 1;
+			}
+			/*recipe.setIngredients() ;
 			if (isLastIngredient == "n") {
 				break;
 
 			}*/
 		}
-
+		//Create list of ingredients
+		
 		loopBreak = false;
-		int stepNum = 0;
-		string currentStep;
-		string isLastStepAnswer;
 
 		while (loopBreak == false)
 		{
@@ -60,11 +63,17 @@ int main() {
 			cout << "Is there another step? y/n" << endl;
 			cin >> isLastStepAnswer;
 			if (isLastStepAnswer == "n") {
-				loopBreak = true;
+			loopBreak = true;
 			}
 		}
+		//create list of directions
 
-	}
+		break;
+	case 2://Load an existing recipe
+		//
+		break;
+
 
 	return 0;
+	}
 }
