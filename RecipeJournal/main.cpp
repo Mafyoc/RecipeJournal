@@ -7,10 +7,12 @@ using namespace std;
 
 int main() {
 	Recipe recipe;
-	int loadOrCreate;
+	string loadOrCreate;
+	int loadOrCreateSwitch;
 	string recipeName;
 	vector<string> ingredients;
 	vector<string> amounts;
+	vector<string> steps;
 	string currentIngredient;
 	string currentAmount;
 	string isLastIngredientAnswer;
@@ -20,30 +22,37 @@ int main() {
 	string currentStep;
 	string isLastStepAnswer;
 
-	cout << "Enter '1' to add a new recipe. Enter '0' to load an existing recipe." << endl;
+	cout << "Enter 'new' to add a new recipe. Enter 'load' to load an existing recipe." << endl;
 	cin >> loadOrCreate;
+	if (loadOrCreate == "new") {
+		loadOrCreateSwitch = 1;
+	}
+	else {
+		loadOrCreateSwitch = 2;
+	}
 
-	switch (loadOrCreate){
+	switch (loadOrCreateSwitch){
 	case 1: //create new recipe
 		cout << "Please enter the name of your recipe." << endl;
 		cin >> recipeName;
 
 		while(loopBreak == false) {
 			
-			cout << "Please add an ingredient." << endl;
+			cout << "Please add an ingredient or type 'end' to continue." << endl;
 			cin >> currentIngredient;
-			cout << "Please enter the amount of ingredient." << endl;
-
-			ingredients[numIngredients] = currentIngredient;
-			amounts[numIngredients] = currentAmount;
-
-			cout << "Is there another ingredient? y/n" << endl;
-			cin >> isLastIngredientAnswer;
-			if (isLastIngredientAnswer == "n") {
+			if (currentIngredient == "end") {
+				cout << endl;
+				for (int i = 0; i < ingredients.size(); i++) {
+					cout << ingredients[i] << " " << amounts[i] << endl;
+				}
 				loopBreak = true;
+				cout << endl;
 			}
 			else {
-				numIngredients += 1;
+				cout << "Please enter the amount of ingredient." << endl;
+				cin >> currentAmount;
+				ingredients.push_back(currentIngredient);
+				amounts.push_back(currentAmount);
 			}
 			/*recipe.setIngredients() ;
 			if (isLastIngredient == "n") {
@@ -51,19 +60,21 @@ int main() {
 
 			}*/
 		}
-		//Create list of ingredients
+		//Create list of ingredients and amounts
 		
 		loopBreak = false;
 
 		while (loopBreak == false)
 		{
-			stepNum += 1;
-			cout << "Please enter the directions for step " << stepNum << " for "<< recipeName << "." << endl;
+			cout << "Please enter the directions for step " << stepNum + 1 << " for "<< recipeName << "." << endl;
+			cout << endl;
 			cin >> currentStep;
+			steps.push_back(currentStep);
+			
 			cout << "Is there another step? y/n" << endl;
 			cin >> isLastStepAnswer;
 			if (isLastStepAnswer == "n") {
-			loopBreak = true;
+				loopBreak = true;
 			}
 		}
 		//create list of directions
@@ -72,8 +83,9 @@ int main() {
 	case 2://Load an existing recipe
 		//
 		break;
-
-
+	default:	
+		cout << "Enter '1' to add a new recipe. Enter '0' to load an existing recipe." << endl;
+		cin >> loadOrCreate;
 	return 0;
 	}
 }
