@@ -7,15 +7,13 @@ using namespace std;
 class Recipe {
 	public:
 		void loadRecipe();
-		void addIngredient(string ingredients);
-		void addAmount(string amounts);
-		void setSteps(string steps);
+		void saveRecipe(string recipeName, vector<string> ingredients, vector<string> amounts, vector<string> steps);
 	private:
 		int recipeID;
 		string recipeName;
-		string ingredients;
-		string amounts;
-		string steps;
+		vector<string> ingredients;
+		vector<string> amounts;
+		vector<string> steps;
 };
 
 #endif
