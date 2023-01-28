@@ -76,7 +76,7 @@ int main() {
 		}
 		//create list of directions
 
-		Recipe::saveRecipe(recipeName, ingredients, amounts, steps);
+		// Recipe::saveRecipe(recipeName, ingredients, amounts, steps);
 
 		break;
 	case 2://Load an existing recipe
