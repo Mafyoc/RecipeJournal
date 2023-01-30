@@ -5,6 +5,8 @@
 #include<vector>
 using namespace std;
 
+void SaveRecipeToFile(string recipeName, vector<string> ingredients, vector<string> amounts, vector<string> steps);
+
 int main() {
 	Recipe recipe;
 	string loadOrCreate;
@@ -32,9 +34,10 @@ int main() {
 
 	switch (loadOrCreateSwitch){
 	case 1: //create new recipe
+
 		cout << "Please enter the name of your recipe." << endl;
 		cin >> recipeName;
-
+		
 		while(loopBreak == false) {
 			
 			cout << "Please add an ingredient or type 'end' to continue." << endl;
@@ -51,12 +54,12 @@ int main() {
 				cout << endl;
 			}
 			else {
+				ingredients.push_back(currentIngredient);
 				cout << "Please enter the amount of " << currentIngredient <<"." << endl;
 				cin >> currentAmount;
+				amounts.push_back(currentAmount);
 			}
 
-			ingredients.push_back(currentIngredient);
-			amounts.push_back(currentAmount);
 		}
 		//Create list of ingredients and amounts
 		
@@ -67,7 +70,6 @@ int main() {
 			cout << "Please enter the directions for step " << steps.size() + 1 << " of "<< recipeName << ". Or type 'end' to finish." << endl;
 			cin >> currentStep;
 			if (currentStep == "end") {
-				recipe.saveRecipe(recipeName, ingredients, amounts, steps);
 				loopBreak = true;
 			}
 			else {
@@ -76,7 +78,7 @@ int main() {
 		}
 		//create list of directions
 
-		// Recipe::saveRecipe(recipeName, ingredients, amounts, steps);
+		SaveRecipeToFile(recipeName, ingredients, amounts, steps);
 
 		break;
 	case 2://Load an existing recipe
@@ -87,4 +89,16 @@ int main() {
 		cin >> loadOrCreate;
 	return 0;
 	}
+}
+
+void SaveRecipeToFile(string recipeName, vector<string> ingredients, vector<string> amounts, vector<string> steps) {
+	ofstream outfile;
+	outfile.open(recipeName + ".txt");
+	for (int i = 0; i < ingredients.size(); i++) {
+		outfile << ingredients[i] << " " << amounts[i] << endl;
+	}
+	for (int i = 0; i < steps.size(); i++) {
+		outfile << steps[i] << endl;
+	}
+	outfile.close();
 }
