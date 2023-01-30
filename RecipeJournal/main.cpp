@@ -21,7 +21,7 @@ int main() {
 	string currentStep;
 
 	cout << "Enter 'new' to add a new recipe. Enter 'load' to load an existing recipe." << endl;
-	cin >> loadOrCreate;
+	getline(cin, loadOrCreate);
 	if (loadOrCreate == "new") {
 		loadOrCreateSwitch = 1;
 	}
@@ -35,13 +35,14 @@ int main() {
 	switch (loadOrCreateSwitch){
 	case 1: //create new recipe
 
+		//cin.ignore();
 		cout << "Please enter the name of your recipe." << endl;
-		cin >> recipeName;
+		getline(cin, recipeName);
 		
 		while(loopBreak == false) {
 			
 			cout << "Please add an ingredient or type 'end' to continue." << endl;
-			cin >> currentIngredient;
+			getline(cin, currentIngredient);
 			if (currentIngredient == "end") {
 				cout << endl;
 				if (ingredients.size() >= 1) {
@@ -56,7 +57,7 @@ int main() {
 			else {
 				ingredients.push_back(currentIngredient);
 				cout << "Please enter the amount of " << currentIngredient <<"." << endl;
-				cin >> currentAmount;
+				getline(cin, currentAmount);
 				amounts.push_back(currentAmount);
 			}
 
@@ -68,7 +69,7 @@ int main() {
 		while (loopBreak == false)
 		{
 			cout << "Please enter the directions for step " << steps.size() + 1 << " of "<< recipeName << ". Or type 'end' to finish." << endl;
-			cin >> currentStep;
+			getline(cin, currentStep);
 			if (currentStep == "end") {
 				loopBreak = true;
 			}
