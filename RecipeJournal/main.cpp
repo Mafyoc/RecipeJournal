@@ -43,6 +43,7 @@ int main() {
 			
 			cout << "Please add an ingredient or type 'end' to continue." << endl;
 			getline(cin, currentIngredient);
+
 			if (currentIngredient == "end") {
 				cout << endl;
 				if (ingredients.size() >= 1) {
@@ -95,11 +96,14 @@ int main() {
 void SaveRecipeToFile(string recipeName, vector<string> ingredients, vector<string> amounts, vector<string> steps) {
 	ofstream outfile;
 	outfile.open(recipeName + ".txt");
+
 	for (int i = 0; i < ingredients.size(); i++) {
 		outfile << ingredients[i] << " " << amounts[i] << endl;
 	}
+
 	for (int i = 0; i < steps.size(); i++) {
 		outfile << steps[i] << endl;
 	}
+
 	outfile.close();
 }
