@@ -3,9 +3,12 @@
 #include"recipe.h"
 #include<string>
 #include<vector>
+
+#include <cstdlib>
 using namespace std;
 
-void SaveRecipeToFile(string recipeName, vector<string> ingredients, vector<string> amounts, vector<string> steps);
+void SaveRecipeToFile(string recipeName, vector<string> ingredients, vector<string> amounts, vector<string> steps); 
+void LoadRecipeFromFile(ifstream inputFile, string recipeName, string inputRecipeName, vector<string> ingredients, vector<string> amounts, vector<string> steps);
 
 int main() {
 	Recipe recipe;
@@ -19,9 +22,13 @@ int main() {
 	string currentAmount;
 	bool loopBreak = false;
 	string currentStep;
+	string inputRecipeName;
+	string inputRecipeData;
+	ifstream inputFile;
 
 	cout << "Enter 'new' to add a new recipe. Enter 'load' to load an existing recipe." << endl;
 	getline(cin, loadOrCreate);
+	cout << endl;
 	if (loadOrCreate == "new") {
 		loadOrCreateSwitch = 1;
 	}
@@ -82,9 +89,27 @@ int main() {
 
 		SaveRecipeToFile(recipeName, ingredients, amounts, steps);
 
+
 		break;
 	case 2://Load an existing recipe
 		// eventual loading code here
+		inputFile.open("recipes/recipeNames.txt");
+		while (!inputFile.eof()) {
+			inputFile >> inputRecipeName;
+			cout << inputRecipeName << endl;
+		}
+		inputFile.close();
+
+		cout << "Please enter the name of the recipe you would like to load" << endl;
+		getline(cin, recipeName);
+
+		inputFile.open("recipes/" + recipeName + ".txt");
+		while (!inputFile.eof()) {
+			inputFile >> inputRecipeData;
+			cout << inputRecipeData << endl;
+		}
+		inputFile.close();
+
 		break;
 	default:	
 		cout << "Enter 'new' to add a new recipe. Enter 'load' to load an existing recipe." << endl;
@@ -95,7 +120,7 @@ int main() {
 
 void SaveRecipeToFile(string recipeName, vector<string> ingredients, vector<string> amounts, vector<string> steps) {
 	ofstream outfile;
-	outfile.open(recipeName + ".txt");
+	outfile.open("recipes/" + recipeName + ".txt");
 
 	for (int i = 0; i < ingredients.size(); i++) {
 		outfile << ingredients[i] << " " << amounts[i] << endl;
@@ -106,4 +131,17 @@ void SaveRecipeToFile(string recipeName, vector<string> ingredients, vector<stri
 	}
 
 	outfile.close();
+
+	outfile.open("recipes/recipeNames.txt", ios_base::app);
+	outfile<<recipeName<<endl;
+	outfile.close();
+}
+
+void LoadRecipeFromFile(ifstream inputFile, string recipeName, string inputRecipeName, vector<string> ingredients, vector<string> amounts, vector<string> steps) {
+	inputFile.open(recipeName + ".txt");
+
+	while (!inputFile.eof()) {
+		inputFile >> inputRecipeName;
+		cout << inputRecipeName << endl;
+	}
 }
