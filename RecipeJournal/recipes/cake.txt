@@ -1,3 +1,9 @@
-sugar 50
+ingredients
+flour 299
+sugar 41
+sausage 4
+
+Instructions
 mix
 bake
+eat
