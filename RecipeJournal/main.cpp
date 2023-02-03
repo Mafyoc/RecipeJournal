@@ -28,18 +28,19 @@ void LoadOrCreate() {
 	else if (loadOrCreate != "load" && loadOrCreate != "new")
 		LoadOrCreate();
 }
+//Prompts the user if they would like to load a recipe or create a new one
 
 void loadRecipe() {
 	string recipeName;
 	string inputRecipeData;
 	ifstream inputFile;
 
+	cout << endl;
 	inputFile.open("recipes/recipeNames.txt");
 	while (getline(inputFile, inputRecipeData)) {
 		inputFile >> inputRecipeData;
 		cout << inputRecipeData << endl;
 	}
-	cout << endl;
 	inputFile.close();
 
 	cout << "Please enter the name of the recipe you would like to load" << endl;
@@ -51,9 +52,10 @@ void loadRecipe() {
 		cout << inputRecipeData << endl;
 	}
 	inputFile.close();
-
+	cout << endl;
 	LoadOrCreate();
 }
+//requests the name of a recipe and outputs its details
 
 void newRecipe() {
 	bool loopBreak = false;
@@ -131,3 +133,4 @@ void newRecipe() {
 
 	LoadOrCreate();
 }
+//requests infromation from the user about the new recipe then saves it to file when complete
