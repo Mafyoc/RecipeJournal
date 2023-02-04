@@ -10,7 +10,7 @@ void newRecipe();
 
 int main() {
 
-	LoadOrCreate();
+	LoadOrCreate(); //initial request from user if they wish to create a new recipe or load an existing one
 
 	return 0;
 }
