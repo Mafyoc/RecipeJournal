@@ -1,0 +1,7 @@
+ingredients
+egg 200
+bacon pieces 300
+
+Instructions
+fry
+rice

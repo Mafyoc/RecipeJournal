@@ -1,2 +1,4 @@
 cake
-egg
+egg fry rice
+cheese burger
+pizza

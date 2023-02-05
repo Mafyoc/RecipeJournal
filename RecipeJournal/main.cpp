@@ -2,6 +2,7 @@
 #include<fstream>
 #include<string>
 #include<vector>
+#include<sstream>
 using namespace std;
 
 void LoadOrCreate();
@@ -18,7 +19,7 @@ int main() {
 void LoadOrCreate() {
 	string loadOrCreate;
 	cout << "type 'new' to create a recipe, type 'load' to load an existing recipe" << endl;
-	cin >> loadOrCreate;
+	getline(cin, loadOrCreate);
 	if (loadOrCreate == "new") {
 		newRecipe();
 	}
@@ -38,13 +39,13 @@ void loadRecipe() {
 	cout << endl;
 	inputFile.open("recipes/recipeNames.txt");
 	while (getline(inputFile, inputRecipeData)) {
-		inputFile >> inputRecipeData;
+		istringstream iss(inputRecipeData);
 		cout << inputRecipeData << endl;
 	}
 	inputFile.close();
 
 	cout << "Please enter the name of the recipe you would like to load" << endl;
-	cin >> recipeName;
+	getline(cin, recipeName);
 	cout << endl;
 
 	inputFile.open("recipes/" + recipeName + ".txt");
@@ -68,12 +69,12 @@ void newRecipe() {
 	vector<string> steps;
 
 	cout << "Please enter the name of your recipe." << endl;
-	cin >> recipeName;
+	getline(cin, recipeName);
 
 	while (loopBreak == false) {
 
 		cout << "Please add an ingredient or type 'end' to continue." << endl;
-		cin>>currentIngredient;
+		getline(cin, currentIngredient);
 
 		if (currentIngredient == "end") {
 			cout << endl;
@@ -89,7 +90,7 @@ void newRecipe() {
 		else {
 			ingredients.push_back(currentIngredient);
 			cout << "Please enter the amount of " << currentIngredient << "." << endl;
-			cin>>currentAmount;
+			getline(cin, currentAmount);
 			amounts.push_back(currentAmount);
 		}
 
@@ -101,7 +102,7 @@ void newRecipe() {
 	while (loopBreak == false)
 	{
 		cout << "Please enter the directions for step " << steps.size() + 1 << " of " << recipeName << ". Or type 'end' to finish." << endl;
-		cin >> currentStep;
+		getline(cin, currentStep);
 		if (currentStep == "end") {
 			loopBreak = true;
 		}

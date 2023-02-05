@@ -1,7 +1,7 @@
 ingredients
 flour 299
-sugar 41
-sausage 4
+eggs 4
+choco drops
 
 Instructions
 mix
