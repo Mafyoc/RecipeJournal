@@ -1,0 +1,9 @@
+ingredients
+flour 300
+honey 300
+sprinkles 1000
+
+Instructions
+make batter
+punch hole
+deep fry

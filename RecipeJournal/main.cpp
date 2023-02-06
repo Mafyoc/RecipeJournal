@@ -39,11 +39,11 @@ void loadRecipe() {
 	cout << endl;
 	inputFile.open("recipes/recipeNames.txt");
 	while (getline(inputFile, inputRecipeData)) {
-		istringstream iss(inputRecipeData);
 		cout << inputRecipeData << endl;
 	}
 	inputFile.close();
 
+	cout << endl;
 	cout << "Please enter the name of the recipe you would like to load" << endl;
 	getline(cin, recipeName);
 	cout << endl;
@@ -60,6 +60,7 @@ void loadRecipe() {
 
 void newRecipe() {
 	bool loopBreak = false;
+	string isCorrectIngredients;
 	string recipeName;
 	string currentIngredient;
 	string currentAmount;
@@ -83,9 +84,16 @@ void newRecipe() {
 					cout << ingredients[i] << " " << amounts[i] << endl;
 				}
 				cout << "Are these ingredients correct?" << endl;
+				getline(cin, isCorrectIngredients);
+				if (isCorrectIngredients == "y") {
+					loopBreak = true;
+					cout << endl;
+				}
+				else {
+					ingredients.clear();
+					cout << "Please re-enter the list of ingredients for " + recipeName;
+				}
 			}
-			loopBreak = true;
-			cout << endl;
 		}
 		else {
 			ingredients.push_back(currentIngredient);
@@ -104,7 +112,22 @@ void newRecipe() {
 		cout << "Please enter the directions for step " << steps.size() + 1 << " of " << recipeName << ". Or type 'end' to finish." << endl;
 		getline(cin, currentStep);
 		if (currentStep == "end") {
-			loopBreak = true;
+			cout << endl;
+			if (steps.size() >= 1) {
+				for (int i = 0; i < steps.size(); i++) {
+					cout << steps[i] << endl;
+				}
+				cout << "Are these instructions correct?" << endl;
+				getline(cin, isCorrectIngredients);
+				if (isCorrectIngredients == "y") {
+					loopBreak = true;
+					cout << endl;
+				}
+				else {
+					steps.clear();
+					cout << "Please re-enter the list of steps for " + recipeName;
+				}
+			}
 		}
 		else {
 			steps.push_back(currentStep);
